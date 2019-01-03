@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Input;
 using PoeHUD.Plugins;
 using PoeHUD.Poe.Components;
 using static AutoPhaseRun.WinApiMouse;
@@ -11,18 +12,22 @@ namespace AutoPhaseRun
     public class AutoPhaseRun : BaseSettingsPlugin<AutoPhaseRunSettings>
     {
         private DateTime lasttime = new DateTime();
-
+ 
         public override void Render()
         {
             if (Settings.Enable)
             {
-                if ((DateTime.Now - lasttime).TotalSeconds > Settings.delay.Value)
+                if (Control.IsKeyLocked(Keys.CapsLock) == true)
                 {
-                    var buffs = GameController.Game.IngameState.Data.LocalPlayer.GetComponent<Life>().Buffs;
-                    if (!buffs.Exists(b => b.Name == "new_phase_run"))
+
+                    if ((DateTime.Now - lasttime).TotalSeconds > Settings.delay.Value)
                     {
-                        Keyboard.KeyPress(Settings.pressedKey.Value);
-                        lasttime = DateTime.Now;
+                        var buffs = GameController.Game.IngameState.Data.LocalPlayer.GetComponent<Life>().Buffs;
+                        if (!buffs.Exists(b => b.Name == "new_phase_run"))
+                        {
+                            Keyboard.KeyPress(Settings.pressedKey.Value);
+                            lasttime = DateTime.Now;
+                        }
                     }
                 }
             }

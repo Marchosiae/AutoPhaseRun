@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PoeHUD">
-      <HintPath>..\..\..\..\..\PoeHud.exe</HintPath>
+      <HintPath>..\..\PoEHUD-x64\Release\PoeHUD.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
