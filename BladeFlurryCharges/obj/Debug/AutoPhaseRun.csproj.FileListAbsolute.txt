@@ -1,3 +1,0 @@
-C:\Users\piard\Downloads\AutoPhaseRun-master\BladeFlurryCharges\obj\Debug\AutoPhaseRun.csproj.CoreCompileInputs.cache
-C:\Users\piard\Downloads\AutoPhaseRun-master\BladeFlurryCharges\obj\Debug\AutoPhaseRun.dll
-C:\Users\piard\Downloads\AutoPhaseRun.dll
