@@ -1,36 +1,33 @@
-﻿using System;
+﻿using PoeHUD.Poe.Components;
+using System;
+using PoeHUD.Plugins;
+using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Input;
-using PoeHUD.Plugins;
-using PoeHUD.Poe.Components;
-using static AutoPhaseRun.WinApiMouse;
 
 namespace AutoPhaseRun
 {
     public class AutoPhaseRun : BaseSettingsPlugin<AutoPhaseRunSettings>
     {
         private DateTime lasttime = new DateTime();
+        
  
         public override void Render()
         {
-            if (Settings.Enable)
-            {
+            if (GameController.Area.CurrentArea.IsHideout || GameController.Area.CurrentArea.IsTown || !GameController.Player.IsAlive || !(Settings.Enable))
+            return;
                 if (Control.IsKeyLocked(Keys.CapsLock) == true)
-                {
-
-                    if ((DateTime.Now - lasttime).TotalSeconds > Settings.delay.Value)
                     {
-                        var buffs = GameController.Game.IngameState.Data.LocalPlayer.GetComponent<Life>().Buffs;
-                        if (!buffs.Exists(b => b.Name == "new_phase_run"))
+                        if ((DateTime.Now - lasttime).TotalSeconds > Settings.delay.Value)
                         {
-                            Keyboard.KeyPress(Settings.pressedKey.Value);
-                            lasttime = DateTime.Now;
+                            var buffs = GameController.Game.IngameState.Data.LocalPlayer.GetComponent<Life>().Buffs;
+                            if (!buffs.Exists(b => b.Name == "new_phase_run"))
+                            {
+                                Keyboard.KeyPress(Settings.pressedKey.Value);
+                                lasttime = DateTime.Now;
+                            }
                         }
-                    }
-                }
-            }
+                }            
         }
     }
 
