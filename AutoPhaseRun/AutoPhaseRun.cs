@@ -4,6 +4,9 @@ using PoeHUD.Plugins;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
+using PoeHUD.Controllers;
+
+
 
 namespace AutoPhaseRun
 {
@@ -15,6 +18,16 @@ namespace AutoPhaseRun
         public override void Render()
         {
             if (GameController.Area.CurrentArea.IsHideout || GameController.Area.CurrentArea.IsTown || !GameController.Player.IsAlive || !(Settings.Enable))
+            return;
+            if (GameController.Game.IngameState.IngameUi.InventoryPanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.OpenLeftPanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.AtlasPanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.OpenRightPanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.SyndicatePanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.IncursionWindow.IsVisible
+                        || GameController.Game.IngameState.IngameUi.TreePanel.IsVisible
+                        || GameController.Game.IngameState.IngameUi.HiddenSkillBar.IsVisible
+                        || GameController.Game.IngameState.UIRoot.GetChildFromIndices(1, 111).ChildCount > 0)
             return;
                 if (Control.IsKeyLocked(Keys.CapsLock) == true)
                     {
